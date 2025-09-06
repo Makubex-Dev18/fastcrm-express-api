@@ -2,6 +2,8 @@ import express, { json } from "express";
 import mongoose from "mongoose";
 import { templateRoutes } from "./routes/templateRoutes.js";
 import { checkIndexes } from "./models/templateModel.js";
+import { contactRoutes } from "./routes/contactRoutes.js";
+import { companyRoutes } from "./routes/companyRoutes.js";
 
 const app = express();
 
@@ -33,5 +35,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/templates", templateRoutes);
+app.use("/api/contacts", contactRoutes);
+app.use("/api/companies", companyRoutes);
 
 app.listen(port, () => console.log("el puerto es: ", port));

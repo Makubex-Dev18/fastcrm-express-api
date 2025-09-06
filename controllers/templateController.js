@@ -4,7 +4,7 @@ const ALLOWED_TYPES = ['welcome', 'followup', 'meet'];
 
 export async function getAllTemplates(req, res) {
   try {
-    const { q, type } = req.query;
+    const { q, type, author } = req.query;
     let query = {};
     if (q) 
       query = {
@@ -23,6 +23,13 @@ export async function getAllTemplates(req, res) {
             }
             query = { ...query, type: normalizedType };   
     }  
+    
+    if (author) {
+      // Puedes usar regex si quieres búsqueda parcial o exacta
+      query.author = { $regex: author, $options: "i" };
+      // Si quieres búsqueda exacta, usa: query.author = author;
+    }
+
 
     const templates = await Templates.find(query);
     res.status(200).json(templates);
