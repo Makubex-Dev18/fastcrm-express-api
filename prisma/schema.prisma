@@ -21,7 +21,8 @@ model Contact {
   createdAt DateTime @default(now())
   companyID Int
 
-  company Company @relation(fields: [companyID], references: [id])
+  company     Company      @relation(fields: [companyID], references: [id])
+  contactLogs ContactLog[]
 }
 
 model Company {
@@ -39,4 +40,16 @@ model Car {
   model     String
   year      Int
   createdAt DateTime @default(now())
+}
+
+//modelo a implementar
+model ContactLog {
+  id           Int      @id @default(autoincrement())
+  // date         DateTime
+  // hora         DateTime
+  plantillaUse String
+  createdAt    DateTime @default(now())
+  contactID    Int
+
+  contact Contact @relation(fields: [contactID], references: [id])
 }

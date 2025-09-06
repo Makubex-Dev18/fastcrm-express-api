@@ -4,9 +4,11 @@ import { templateRoutes } from "./routes/templateRoutes.js";
 import { checkIndexes } from "./models/templateModel.js";
 import { contactRoutes } from "./routes/contactRoutes.js";
 import { companyRoutes } from "./routes/companyRoutes.js";
+import { contactLogRoutes } from "./routes/contactLogRoutes.js";
+import cors from "cors";
 
 const app = express();
-
+app.use(cors());
 app.use(json());
 
 const port = 3000;
@@ -37,5 +39,6 @@ app.get("/", (req, res) => {
 app.use("/api/templates", templateRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/companies", companyRoutes);
+app.use("/api/contactlogs", contactLogRoutes);
 
 app.listen(port, () => console.log("el puerto es: ", port));
